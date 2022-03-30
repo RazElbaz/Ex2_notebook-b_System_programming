@@ -6,9 +6,9 @@ using ariel::Direction;
 const int maxValue=99;
 
     void ariel::Notebook::emptyRow( int Page, int Row) {
-        /**
-        This function is designed to create a new line in the notebook
-         */
+    /**
+    This function is designed to create a new line in the notebook
+    */
         if (notebook[Page][Row].empty()) {
             for ( int i = 0; i < maxValue; ++i) {
                     notebook[Page][Row].push_back('_');
@@ -16,9 +16,9 @@ const int maxValue=99;
         }}
 
     void ariel::Notebook::emptyCol( int Page, int Row, int Size) {
-        /**
-        This function is designed to create a new column in the notebook
-         */
+    /**
+    This function is designed to create a new column in the notebook
+    */
         for ( size_t i = 0; i < Size; ++i) {
             if (notebook[Page][(unsigned long)Row + i].empty()) {
                 for (int k = 0; k < maxValue + 1; k++) {
@@ -29,8 +29,8 @@ const int maxValue=99;
 
     void ariel::Notebook::write( int Page,  int Row,  int Column, Direction direction, string const &text) {
     /**
-    Gets a position (page, row and column), direction (horizontal or vertical), and a string that represents what needs to be written, and writes the string in a notebook in the appropriate place.
-    Note that if we have already written, or deleted to the specified location, the function will throw an error.
+        Gets a position (page, row and column), direction (horizontal or vertical), and a string that represents what needs to be written, and writes the string in a notebook in the appropriate place.
+        Note that if we have already written, or deleted to the specified location, the function will throw an error.
     */
         if (Page < 0 || Row < 0 || Column < 0 || Column > maxValue) {
             throw std::invalid_argument("Error! Entering incorrect values to the notebook");
@@ -111,12 +111,12 @@ const int maxValue=99;
     }
 
 
-        void ariel::Notebook::erase( int Page,  int Row,  int Column, Direction direction, int Length) {
-        /**
+    void ariel::Notebook::erase( int Page,  int Row,  int Column, Direction direction, int Length) {
+    /**
         Gets position (page, row and column), direction (horizontal or vertical), and number of characters, and deletes what is written in the relevant position and direction.
         Since we are writing with a pen, the function will not be deleted but "scribbled" in the appropriate places.
         (Place the characters in the character ~)
-         */
+    */
         if(Page<0 || Row <0 || Column<0 || Column > maxValue || Length<0){
             throw std::invalid_argument("Error! Entering incorrect values to the notebook");
         }
