@@ -2,7 +2,7 @@
 # This Makefile can handle any set of cpp and hpp files.
 # To use it, you should put all your cpp and hpp files in the SOURCE_PATH folder.
 
-CXX=clang++
+CXX=clang++-9
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
@@ -15,11 +15,9 @@ HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
 run: test
-	./$^
 
-test: TestRunner.o StudentTest1.o  StudentTest2.o StudentTest3.o $(OBJECTS)
+test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
-
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
@@ -40,8 +38,8 @@ tidy:
 	clang-tidy $(SOURCES) $(TIDY_FLAGS) --
 
 valgrind: test
-	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test1 2>&1 | { egrep "lost| at " || true; }
+	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
 
 clean:
-	rm -f $(OBJECTS) *.o test* 
+	rm -f $(OBJECTS) *.o test*
 	rm -f StudentTest*.cpp
